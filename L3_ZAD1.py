@@ -17,19 +17,19 @@ def probability(n, k, p):
   # jeśli potrzebujesz, możesz dopisać również inne funkcje (pomocnicze), 
   # jednak główny cel zadania musi być realizowany w tej funkcji;
 
-  def to_n_pow(base, pow, count_mult):
-    result = 1
-    while pow:
-      if pow % 2 == 0:
-        pow //= 2
-        base *= base
-        count_mult += 3
-      else:
-        pow //= 2
-        result *= base
-        base *= base
-        count_mult += 3
-    return result , count_mult
+  def to_n_pow(base, power, count_mult):
+      result = 1
+      while power:
+          power, check = divmod(power, 2)
+          count_mult += 1
+          if check == 0:
+              base *= base
+              count_mult += 1
+          else:
+              result *= base
+              base *= base
+              count_mult += 2
+      return result , count_mult
 
   prob = 0
   count_mult = 0
@@ -60,8 +60,8 @@ def probability(n, k, p):
   return (prob, count_mult)
 
 if __name__ == "__main__":
-  print(probability(1000,1000,0.5))
-  print(probability(1000,0,0.001))
+  print(probability(100,100,0.5))
+  print(probability(100,0,0.001))
   print(probability(100,50,0.6))
   print(probability(10,9,0.9))
 
